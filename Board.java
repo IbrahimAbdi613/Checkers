@@ -5,11 +5,15 @@ public class Board {
     public Board(int dimension) {
         Board = new int[dimension][dimension];
         for (int i = 0; i < Board.length; i++) {
+            int col = 0;
+            if (i > 0 && Board[i - 1][Board.length - 1] == 1)
+                col++;
             for (int j = 0; j < Board.length; j++) {
-                if ((j % 2) == 0) {
+                if (((col + 1) % 2) == 0) 
                     Board[i][j] = 1;
-                } else
-                    Board[i][j] = 0;
+                 else
+                     Board[i][j] = 0;
+                col++;
             }
         }
     }
