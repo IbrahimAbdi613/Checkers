@@ -8,6 +8,7 @@ public class checkerPiece {
         this.y = y;
         this.colour = colour;
     }
+    
 
 
 
