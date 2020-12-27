@@ -1,8 +1,10 @@
 public class Board {
 
     int[][] Board;
+    int Dimension;
     
     public Board(int dimension) {
+        Dimension = dimension;
         Board = new int[dimension][dimension];
         for (int i = 0; i < Board.length; i++) {
             int col = 0;

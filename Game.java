@@ -1,12 +1,12 @@
 public class Game {
     Board board;
     checkerPiece[] White;
-    checkerPiece[] Black;
+    checkerPiece[] Red;
 
     public Game(int dimension) {
         board = new Board(dimension);
         White = new checkerPiece[12];
-        Black = new checkerPiece[12];
+        Red = new checkerPiece[12];
         int x = 0;
         int x2 = 0;
         int y = -1;
@@ -22,8 +22,8 @@ public class Game {
                     x2 = 0;
                 }
             }
-            White[i] = new checkerPiece(x, y, "White");
-            Black[i] = new checkerPiece(x2, 7 - y, "Black");
+            White[i] = new checkerPiece(x,7 - y, "White");
+            Red[i] = new checkerPiece(x2, y, "Red");
             x = x + 2;
             x2 = x2 + 2;
         }
@@ -35,13 +35,13 @@ public class Game {
             System.out.println("The X value is " + checkerPiece.x + " and the y value is " + checkerPiece.y
                     + " the colour is " + checkerPiece.colour);
         }
-        System.out.println("\n\nBlack");
-        for (checkerPiece checkerPiece : Black) {
+        System.out.println("\n\nRed");
+        for (checkerPiece checkerPiece : Red) {
             System.out.println("The X value is " + checkerPiece.x + " and the y value is " + checkerPiece.y
                     + " the colour is " + checkerPiece.colour);
         }
 
-        System.out.println("This is the board \n");
+        System.out.println("\n\nThis is the board");
         board.printBoard();
     
     }
@@ -49,6 +49,9 @@ public class Game {
 
     public static void main(String[] args) {
         Game game = new Game(8);
+        System.out.println(game.White[8].moveRight(game)); 
+        System.out.println(game.White[8].moveRight(game)); 
+        System.out.println(game.White[8].moveRight(game)); 
         game.printGame();
         
     }
