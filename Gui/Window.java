@@ -1,10 +1,11 @@
 package Checkers.Gui;
-import  Checkers.Backend.Game;
-import java.awt.Canvas;
-import java.awt.Dimension;
 
-import javax.swing.JFrame;
+import Checkers.Backend.Game;
 
+import java.awt.*;
+import java.io.File;
+
+import javax.swing.*;
 
 
 public class Window extends Canvas {
@@ -20,11 +21,19 @@ public class Window extends Canvas {
         frame.setMaximumSize(new Dimension(width, height));
         frame.setMinimumSize(new Dimension(width, height));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        frame.setTitle(titleString);
+
+        ImageIcon image = new ImageIcon("src/Checkers/Icon.jpg");
+        frame.setIconImage(image.getImage());
+        frame.getContentPane().setBackground(new Color(245,245,220));
+
+
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
-        frame.add(game);
         frame.setVisible(true);
-        game.start();
+
+
     }
 
 }

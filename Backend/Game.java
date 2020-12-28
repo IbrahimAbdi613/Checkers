@@ -12,7 +12,7 @@ public class Game extends Canvas implements Runnable {
     Board board;
     checkerPiece[] White;
     checkerPiece[] Red;
-    public static final int WIDTH = 800, HEIGHT = 800;
+    public static final int WIDTH = 900, HEIGHT = 900;
 
     public Game(int dimension) {
         new Window(WIDTH, HEIGHT, "Checker", this);
