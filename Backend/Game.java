@@ -9,13 +9,13 @@ public class Game extends Canvas implements Runnable {
      *
      */
     private static final long serialVersionUID = 1L;
-    Board board;
-    checkerPiece[] White;
-    checkerPiece[] Red;
-    public static final int WIDTH = 900, HEIGHT = 900;
+    public Board board;
+    public checkerPiece[] White;
+    public checkerPiece[] Red;
+    public static final int WIDTH = 1600, HEIGHT = 1040;
+
 
     public Game(int dimension) {
-        new Window(WIDTH, HEIGHT, "Checker", this);
         board = new Board(dimension);
         White = new checkerPiece[12];
         Red = new checkerPiece[12];
@@ -38,6 +38,8 @@ public class Game extends Canvas implements Runnable {
             x = x + 2;
             x2 = x2 + 2;
         }
+        new Window(WIDTH, HEIGHT, "Checker", this);
+
     }
 
     public void printGame() {
@@ -57,7 +59,7 @@ public class Game extends Canvas implements Runnable {
 
     }
 
-    @Override
+
     public void run() {
         // TODO Auto-generated method stub
 
@@ -69,10 +71,7 @@ public class Game extends Canvas implements Runnable {
 
     public static void main(String[] args) {
         Game game = new Game(8);
-        System.out.println(game.White[8].moveRight(game));
-        System.out.println(game.White[8].moveRight(game));
-        System.out.println(game.White[8].moveRight(game));
-        game.printGame();
+       // game.printGame();
 
     }
 }

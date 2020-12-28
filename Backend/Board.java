@@ -1,8 +1,8 @@
 package Checkers.Backend;
 
 public class Board {
-    int[][] Board;
-    int Dimension;
+    public int[][] Board;
+    public int Dimension;
 
     public Board(int dimension) {
         Dimension = dimension;
