@@ -1,10 +1,10 @@
 package Checkers.Backend;
 
 public class checkerPiece {
-    int x;
-    int y;
-    String colour;
-    Boolean King;
+    public int x;
+    public int y;
+    public String colour;
+    public Boolean King;
 
     public checkerPiece(int x, int y, String colour) {
         this.x = x;

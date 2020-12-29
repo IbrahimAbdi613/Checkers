@@ -7,14 +7,12 @@ import javax.swing.*;
 
 public class Window extends Canvas {
     JFrame frame = new JFrame();
-
     /**
      *
      */
     private static final long serialVersionUID = 1L;
 
     public Window(int width, int height, String titleString, Game game) {
-
         //Creates the window
         frame.setMaximumSize(new Dimension(width, height));
         frame.setMinimumSize(new Dimension(width, height));
@@ -22,14 +20,17 @@ public class Window extends Canvas {
 
         //Sets the title of the window as well the icon and the background colour
         frame.setTitle(titleString);
-        ImageIcon image = new ImageIcon("src/Checkers/Icon.jpg");
+        ImageIcon image = new ImageIcon("src/Checkers/Gui/Icon.jpg");
         frame.setIconImage(image.getImage());
-        frame.getContentPane().setBackground(new Color(245,245,220));
+        frame.getContentPane().setBackground(Color.GRAY);
+        frame.add(new MyPanel(game));
         makeBoard(game);
+
         frame.setLayout(null);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+
 
     }
     private void makeBoard(Game game){
@@ -43,13 +44,15 @@ public class Window extends Canvas {
                     JPanel blackPanel = new JPanel();
                     blackPanel.setBackground(Color.BLACK);
                     blackPanel.setBounds(Width,Height,125,125);
+                    blackPanel.setOpaque(true);
                     frame.add(blackPanel);
                 }
                 else if (game.board.Board[i][j] == 0) {
                     //White part of chessboard
                     JPanel whitePanel = new JPanel();
-                    whitePanel.setBackground(Color.WHITE);
+                    whitePanel.setBackground(Color.RED);
                     whitePanel.setBounds(Width,Height,125,125);
+                    whitePanel.setOpaque(true);
                     frame.add(whitePanel);
                 }
                 Width = Width + 125;
@@ -60,5 +63,8 @@ public class Window extends Canvas {
         }
 
     }
+
+
+
 
 }

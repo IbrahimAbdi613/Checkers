@@ -38,7 +38,7 @@ public class Game extends Canvas implements Runnable {
             x = x + 2;
             x2 = x2 + 2;
         }
-        new Window(WIDTH, HEIGHT, "Checker", this);
+        new Window(WIDTH, HEIGHT, "Checkers (By Ibrahim Abdirahman)", this);
 
     }
 
@@ -71,7 +71,7 @@ public class Game extends Canvas implements Runnable {
 
     public static void main(String[] args) {
         Game game = new Game(8);
-       // game.printGame();
+        game.printGame();
 
     }
 }
