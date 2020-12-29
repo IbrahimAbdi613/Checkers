@@ -11,14 +11,14 @@ public class Game extends Canvas implements Runnable {
     private static final long serialVersionUID = 1L;
     public Board board;
     public checkerPiece[] White;
-    public checkerPiece[] Red;
+    public checkerPiece[] Black;
     public static final int WIDTH = 1600, HEIGHT = 1040;
 
 
     public Game(int dimension) {
         board = new Board(dimension);
         White = new checkerPiece[12];
-        Red = new checkerPiece[12];
+        Black = new checkerPiece[12];
         int x = 0;
         int x2 = 0;
         int y = -1;
@@ -34,7 +34,7 @@ public class Game extends Canvas implements Runnable {
                 }
             }
             White[i] = new checkerPiece(x, 7 - y, "White");
-            Red[i] = new checkerPiece(x2, y, "Red");
+            Black[i] = new checkerPiece(x2, y, "Red");
             x = x + 2;
             x2 = x2 + 2;
         }
@@ -49,7 +49,7 @@ public class Game extends Canvas implements Runnable {
                     + " the colour is " + checkerPiece.colour);
         }
         System.out.println("\n\nRed");
-        for (checkerPiece checkerPiece : Red) {
+        for (checkerPiece checkerPiece : Black) {
             System.out.println("The X value is " + checkerPiece.x + " and the y value is " + checkerPiece.y
                     + " the colour is " + checkerPiece.colour);
         }
@@ -61,7 +61,7 @@ public class Game extends Canvas implements Runnable {
 
 
     public void run() {
-        // TODO Auto-generated method stub
+
 
     }
 
@@ -71,7 +71,7 @@ public class Game extends Canvas implements Runnable {
 
     public static void main(String[] args) {
         Game game = new Game(8);
-        game.printGame();
+       //game.printGame();
 
     }
 }
