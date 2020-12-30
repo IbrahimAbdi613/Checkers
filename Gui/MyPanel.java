@@ -9,9 +9,15 @@ public class MyPanel extends JLayeredPane {
     Game game;
     public int ShowPathFlag;
     public checkerPiece CurrentPiece;
+    public checkerPiece clone;
+    public checkerPiece[] checkerPieces;
+    public Window window;
 
-    MyPanel(Game game){
+    MyPanel(Game game, Window window){
+        this.window = window;
+        checkerPieces = new checkerPiece[4];
         CurrentPiece = null;
+        clone = null;
         ShowPathFlag = 1;
         this.game = game;
         this.setPreferredSize(new Dimension(1600,1000));
@@ -19,37 +25,88 @@ public class MyPanel extends JLayeredPane {
         this.setBounds(0,0,1600,1000);
 
     }
-    public void paintComponent(Graphics g){
-        System.out.println(ShowPathFlag);
-        Graphics2D graphics2D = (Graphics2D) g;
-        graphics2D.setPaint(Color.red);
 
+    public void paintComponent(Graphics g){
+        Graphics2D graphics2D = (Graphics2D) g;
         if(ShowPathFlag == 2){
-            int x = 320 + CurrentPiece.x * (125);
-            int y = 20 + CurrentPiece.y * (125);
-            CurrentPiece.ToString();
+            graphics2D.setPaint(Color.BLUE);
             if(CurrentPiece.CheckMoveLeft(game)){
-                System.out.println("You can move Left");
+                clone = new checkerPiece(CurrentPiece.x,CurrentPiece.y,CurrentPiece.colour);
+                clone.moveLeft(game);
+                checkerPieces[0] = clone;
+                int x = 300 + clone.x * (125);
+                int y =  clone.y * (125);
+                graphics2D.fillRect(x,y,125,125);
             }
             if (CurrentPiece.CheckMoveRight(game)){
-                System.out.println("You can move Right");
+                clone = new checkerPiece(CurrentPiece.x,CurrentPiece.y,CurrentPiece.colour);
+                clone.moveRight(game);
+                checkerPieces[1] = clone;
+                int x = 300 + clone.x * (125);
+                int y =  clone.y * (125);
+                graphics2D.fillRect(x,y,125,125);
+            }
+
+        }
+
+        else {
+            for (int i = 0; i < checkerPieces.length; i++) {
+                if(checkerPieces[i]!=null) {
+                    if (window.ComponentClickedY == checkerPieces[i].y && window.ComponentClickedX == checkerPieces[i].x) {
+                        if (i == 0) {
+                            for (int j = 0; j < game.Black.length; j++) {
+                                if(game.Black[j].x == CurrentPiece.x && game.Black[j].y == CurrentPiece.y){ ;
+                                    game.Black[j].moveLeft(game);
+                                    break;
+                                }
+                            }
+                            for (int j = 0; j < game.Red.length; j++) {
+                                if(game.Red[j].x == CurrentPiece.x && game.Red[j].y == CurrentPiece.y){
+                                    game.Red[j].moveLeft(game);
+                                    break;
+                                }
+                            }
+                        }
+                        else if (i == 1) {
+                            for (int j = 0; j < game.Black.length; j++) {
+                                if(game.Black[j].x==CurrentPiece.x && game.Black[j].y == CurrentPiece.y){
+                                    game.Black[j].moveRight(game);
+                                    break;
+                                }
+                            }
+                            for (int j = 0; j < game.Red.length; j++) {
+                                if(game.Red[j].x==CurrentPiece.x && game.Red[j].y == CurrentPiece.y){
+                                    game.Red[j].moveRight(game);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+
             }
             CurrentPiece = null;
-            graphics2D.fillOval(x,y,75,75);
+            checkerPieces = new checkerPiece[4];
+        }
+            for (int i = 0; i < game.Black.length; i++) {
+                int x = 330 + game.Black[i].x * (125);
+                int y = 30 + game.Black[i].y * (125);
+                graphics2D.setPaint(Color.WHITE);
+                graphics2D.fillOval(x, y, 60, 60);
+                graphics2D.setPaint(Color.RED);
+                graphics2D.fillOval(x + 3, y + 3, 54, 54);
 
-        }
+            }
 
-        for (int i = 0; i < game.Black.length; i ++){
-            int x = 320 + game.Black[i].x * (125);
-            int y = 20 + game.Black[i].y * (125);
-            graphics2D.fillOval(x,y,75,75);
-        }
-        graphics2D.setPaint(new Color(40,40,40));
-        for (int i = 0; i < game.Red.length; i ++){
-            int x = 320 + game.Red[i].x * (125);
-            int y = 20 + game.Red[i].y * (125);
-            graphics2D.fillOval(x,y,75,75);
-        }
+            graphics2D.setPaint(new Color(40, 40, 40));
+            for (int i = 0; i < game.Red.length; i++) {
+                int x = 330 + game.Red[i].x * (125);
+                int y = 30 + game.Red[i].y * (125);
+                graphics2D.setPaint(Color.WHITE);
+                graphics2D.fillOval(x, y, 60, 60);
+                graphics2D.setPaint(new Color(40, 40, 40));
+                graphics2D.fillOval(x + 3, y + 3, 54, 54);
+            }
 
     }
 

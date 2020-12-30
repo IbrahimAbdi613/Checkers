@@ -1,6 +1,7 @@
 package Checkers.Gui;
 
 import Checkers.Backend.Game;
+import Checkers.Backend.checkerPiece;
 
 
 import java.awt.*;
@@ -14,6 +15,8 @@ public class Window extends JLabel implements MouseListener  {
     Game game;
     MyPanel myPanel;
     public int ShowPathFlag;
+    public int ComponentClickedX ;
+    public int ComponentClickedY ;
     /**
      *
      */
@@ -31,7 +34,7 @@ public class Window extends JLabel implements MouseListener  {
         ImageIcon image = new ImageIcon("src/Checkers/Gui/Icon.jpg");
         frame.setIconImage(image.getImage());
         frame.getContentPane().setBackground(new Color(17, 59 ,8 ));
-        myPanel = new MyPanel(game);
+        myPanel = new MyPanel(game,this);
         frame.add(myPanel);
         makeBoard(game);
 
@@ -85,32 +88,35 @@ public class Window extends JLabel implements MouseListener  {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        int ComponentClickedX =  ((e.getComponent().getX() - 300) / 125);
-        int ComponentClickedY =  (e.getComponent().getY()/ 125 );
-
         if(ShowPathFlag == 1) {
+            ComponentClickedX =  ((e.getComponent().getX() - 300) / 125);
+            ComponentClickedY =  (e.getComponent().getY()/ 125 );
             for (int i = 0; i < game.Black.length; i++) {
                 if(game.Black[i].x == ComponentClickedX && game.Black[i].y == ComponentClickedY){
                     myPanel.CurrentPiece = game.Black[i];
                     ShowPathFlag = 2;
                     myPanel.ShowPathFlag = ShowPathFlag;
-
+                    myPanel.repaint();
                     break;
                 }
                 else if(game.Red[i].x == ComponentClickedX && game.Red[i].y == ComponentClickedY){
                     myPanel.CurrentPiece = game.Red[i];
                     ShowPathFlag = 2;
                     myPanel.ShowPathFlag = ShowPathFlag;
+                    myPanel.repaint();
                     break;
                 }
             }
-            myPanel.repaint();
 
         }
         else if (ShowPathFlag == 2){
+            ComponentClickedX =  ((e.getComponent().getX() - 300) / 125);
+            ComponentClickedY =  (e.getComponent().getY()/ 125 );
             ShowPathFlag = 1;
             myPanel.ShowPathFlag = ShowPathFlag;
             myPanel.repaint();
+
+
         }
 
     }

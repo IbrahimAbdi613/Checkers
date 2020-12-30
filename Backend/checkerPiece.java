@@ -126,7 +126,7 @@ public class checkerPiece {
                 return true;
             }
         }
-        if (this.colour.equals( "Black")) {
+        if (this.colour.equals("Black")) {
             if ((x - 1 > -1) && (y - 1 > -1)) {
                 for (int i = 0; i < game.Black.length; i++) {
                     if((game.Black[i].x == this.x - 1 && game.Black[i].y == this.y - 1) ||(game.Red[i].x == this.x - 1 && game.Red[i].y == this.y - 1)){
