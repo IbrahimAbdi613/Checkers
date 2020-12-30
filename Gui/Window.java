@@ -1,7 +1,7 @@
 package Checkers.Gui;
 
 import Checkers.Backend.Game;
-import jdk.swing.interop.SwingInterOpUtils;
+
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -9,14 +9,18 @@ import java.awt.event.MouseListener;
 import javax.swing.*;
 
 
-public class Window extends Canvas implements MouseListener {
+public class Window extends JLabel implements MouseListener  {
     JFrame frame = new JFrame();
+    Game game;
+    MyPanel myPanel;
+    public int ShowPathFlag;
     /**
      *
      */
     private static final long serialVersionUID = 1L;
 
     public Window(int width, int height, String titleString, Game game) {
+        this.game = game;
         //Creates the window
         frame.setMaximumSize(new Dimension(width, height));
         frame.setMinimumSize(new Dimension(width, height));
@@ -26,15 +30,17 @@ public class Window extends Canvas implements MouseListener {
         frame.setTitle(titleString);
         ImageIcon image = new ImageIcon("src/Checkers/Gui/Icon.jpg");
         frame.setIconImage(image.getImage());
-        frame.getContentPane().setBackground(new Color(17, 59, 8 ));
-        frame.add(new MyPanel(game));
+        frame.getContentPane().setBackground(new Color(17, 59 ,8 ));
+        myPanel = new MyPanel(game);
+        frame.add(myPanel);
         makeBoard(game);
 
         frame.setLayout(null);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-
+        repaint();
+        ShowPathFlag = 1;
 
     }
     private void makeBoard(Game game){
@@ -74,12 +80,39 @@ public class Window extends Canvas implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("Comon mane");
+
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        System.out.println("your pressed me fam");
+        int ComponentClickedX =  ((e.getComponent().getX() - 300) / 125);
+        int ComponentClickedY =  (e.getComponent().getY()/ 125 );
+
+        if(ShowPathFlag == 1) {
+            for (int i = 0; i < game.Black.length; i++) {
+                if(game.Black[i].x == ComponentClickedX && game.Black[i].y == ComponentClickedY){
+                    myPanel.CurrentPiece = game.Black[i];
+                    ShowPathFlag = 2;
+                    myPanel.ShowPathFlag = ShowPathFlag;
+
+                    break;
+                }
+                else if(game.Red[i].x == ComponentClickedX && game.Red[i].y == ComponentClickedY){
+                    myPanel.CurrentPiece = game.Red[i];
+                    ShowPathFlag = 2;
+                    myPanel.ShowPathFlag = ShowPathFlag;
+                    break;
+                }
+            }
+            myPanel.repaint();
+
+        }
+        else if (ShowPathFlag == 2){
+            ShowPathFlag = 1;
+            myPanel.ShowPathFlag = ShowPathFlag;
+            myPanel.repaint();
+        }
+
     }
 
     @Override
@@ -95,5 +128,7 @@ public class Window extends Canvas implements MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
 
+
     }
+
 }
