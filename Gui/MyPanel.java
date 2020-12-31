@@ -30,17 +30,21 @@ public class MyPanel extends JLayeredPane {
         Graphics2D graphics2D = (Graphics2D) g;
         if(ShowPathFlag == 2){
             graphics2D.setPaint(Color.BLUE);
-            if(CurrentPiece.CheckMoveLeft(game)){
+            if(CurrentPiece.moveLeft(game,this) == 1){
                 clone = new checkerPiece(CurrentPiece.x,CurrentPiece.y,CurrentPiece.colour);
-                clone.moveLeft(game);
+                ShowPathFlag = 1;
+                clone.moveLeft(game,this);
+                ShowPathFlag = 2;
                 checkerPieces[0] = clone;
                 int x = 300 + clone.x * (125);
                 int y =  clone.y * (125);
                 graphics2D.fillRect(x,y,125,125);
             }
-            if (CurrentPiece.CheckMoveRight(game)){
+            if (CurrentPiece.moveRight(game,this) == 1){
                 clone = new checkerPiece(CurrentPiece.x,CurrentPiece.y,CurrentPiece.colour);
-                clone.moveRight(game);
+                ShowPathFlag = 1;
+                clone.moveRight(game,this);
+                ShowPathFlag = 2;
                 checkerPieces[1] = clone;
                 int x = 300 + clone.x * (125);
                 int y =  clone.y * (125);
@@ -56,13 +60,13 @@ public class MyPanel extends JLayeredPane {
                         if (i == 0) {
                             for (int j = 0; j < game.Black.length; j++) {
                                 if(game.Black[j].x == CurrentPiece.x && game.Black[j].y == CurrentPiece.y){ ;
-                                    game.Black[j].moveLeft(game);
+                                    game.Black[j].moveLeft(game,this);
                                     break;
                                 }
                             }
                             for (int j = 0; j < game.Red.length; j++) {
                                 if(game.Red[j].x == CurrentPiece.x && game.Red[j].y == CurrentPiece.y){
-                                    game.Red[j].moveLeft(game);
+                                    game.Red[j].moveLeft(game,this);
                                     break;
                                 }
                             }
@@ -70,13 +74,13 @@ public class MyPanel extends JLayeredPane {
                         else if (i == 1) {
                             for (int j = 0; j < game.Black.length; j++) {
                                 if(game.Black[j].x==CurrentPiece.x && game.Black[j].y == CurrentPiece.y){
-                                    game.Black[j].moveRight(game);
+                                    game.Black[j].moveRight(game,this);
                                     break;
                                 }
                             }
                             for (int j = 0; j < game.Red.length; j++) {
                                 if(game.Red[j].x==CurrentPiece.x && game.Red[j].y == CurrentPiece.y){
-                                    game.Red[j].moveRight(game);
+                                    game.Red[j].moveRight(game,this);
                                     break;
                                 }
                             }
