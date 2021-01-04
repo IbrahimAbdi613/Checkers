@@ -12,6 +12,7 @@ public class MyPanel extends JLayeredPane {
     public CheckerPiece clone;
     public CheckerPiece[] CheckerPieces;
     public Window window;
+    public int remove;
 
     MyPanel(Game game, Window window){
         this.window = window;
@@ -64,6 +65,7 @@ public class MyPanel extends JLayeredPane {
         }
 
         else {
+
             for (int i = 0; i < CheckerPieces.length; i++) {
                 if(CheckerPieces[i]!=null) {
                     if (window.ComponentClickedY == CheckerPieces[i].y && window.ComponentClickedX == CheckerPieces[i].x) {
@@ -99,27 +101,31 @@ public class MyPanel extends JLayeredPane {
                 }
 
             }
+
             CurrentPiece = null;
             CheckerPieces = new CheckerPiece[4];
         }
             for (int i = 0; i < game.Black.length; i++) {
-                int x = 330 + game.Black[i].x * (125);
-                int y = 30 + game.Black[i].y * (125);
-                graphics2D.setPaint(Color.WHITE);
-                graphics2D.fillOval(x, y, 60, 60);
-                graphics2D.setPaint(Color.RED);
-                graphics2D.fillOval(x + 3, y + 3, 54, 54);
-
+                if(game.Black[i].x > -2){
+                    int x = 330 + game.Black[i].x * (125);
+                    int y = 30 + game.Black[i].y * (125);
+                    graphics2D.setPaint(Color.WHITE);
+                    graphics2D.fillOval(x, y, 60, 60);
+                    graphics2D.setPaint(Color.RED);
+                    graphics2D.fillOval(x + 3, y + 3, 54, 54);
+                }
             }
 
             graphics2D.setPaint(new Color(40, 40, 40));
             for (int i = 0; i < game.Red.length; i++) {
-                int x = 330 + game.Red[i].x * (125);
-                int y = 30 + game.Red[i].y * (125);
-                graphics2D.setPaint(Color.WHITE);
-                graphics2D.fillOval(x, y, 60, 60);
-                graphics2D.setPaint(new Color(40, 40, 40));
-                graphics2D.fillOval(x + 3, y + 3, 54, 54);
+                if (game.Red[i].x > -2) {
+                    int x = 330 + game.Red[i].x * (125);
+                    int y = 30 + game.Red[i].y * (125);
+                    graphics2D.setPaint(Color.WHITE);
+                    graphics2D.fillOval(x, y, 60, 60);
+                    graphics2D.setPaint(new Color(40, 40, 40));
+                    graphics2D.fillOval(x + 3, y + 3, 54, 54);
+                }
             }
 
     }

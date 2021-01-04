@@ -94,46 +94,68 @@ public class CheckerPiece {
         return 0;
     }
 
-    public void removeOpponents(Game game, MyPanel myPanel) {
+    public void removeOpponents(Game game,MyPanel myPanel){
+        game.CoordinatesForKills = new ArrayList<>();
+        removeOpponents(game,myPanel,this);
+    }
+
+    private int removeOpponents(Game game, MyPanel myPanel, CheckerPiece checkerPiece) {
         int flag = myPanel.ShowPathFlag;
         CheckerPiece cloneRight;
         CheckerPiece cloneLeft;
-        if (this.colour == "Red") {
-            cloneRight = new CheckerPiece(this.x + 1, this.y + 1, this.colour);
-            cloneLeft = new CheckerPiece(this.x - 1, this.y + 1, this.colour);
-            game.CoordinatesForKills = new ArrayList<>();
+        if (checkerPiece.colour == "Red") {
+            int counter = 0;
+            cloneRight = new CheckerPiece(checkerPiece.x + 1, checkerPiece.y + 1, checkerPiece.colour);
+            cloneLeft = new CheckerPiece(checkerPiece.x - 1, checkerPiece.y + 1, checkerPiece.colour);
             myPanel.ShowPathFlag = 2;
-            if (this.moveLeft(game, myPanel) == 0) {
+            if (checkerPiece.moveLeft(game, myPanel) == 0) {
                 myPanel.ShowPathFlag = 1;
                 for (int i = 0; i < game.Black.length; i++) {
                     if (cloneLeft.x == game.Black[i].x && cloneLeft.y == game.Black[i].y) {
                         if (cloneLeft.moveLeft(game, myPanel) == 1) {
                             game.CoordinatesForKills.add(cloneLeft.x);
                             game.CoordinatesForKills.add(cloneLeft.y);
+                            counter = counter + 2;
+                            System.out.println("lll");
                         }
                     }
                 }
                 myPanel.ShowPathFlag = 2;
             }
             myPanel.ShowPathFlag = 2;
-            if (this.moveRight(game, myPanel) == 0) {
+            if (checkerPiece.moveRight(game, myPanel) == 0) {
                 myPanel.ShowPathFlag = 1;
                 for (int i = 0; i < game.Black.length; i++) {
                     if (cloneRight.x == game.Black[i].x && cloneRight.y == game.Black[i].y) {
                         if (cloneRight.moveRight(game, myPanel) == 1) {
                             game.CoordinatesForKills.add(cloneRight.x);
                             game.CoordinatesForKills.add(cloneRight.y);
+                            counter ++;
+                            System.out.println("lll");
+
                         }
                     }
                 }
-                myPanel.ShowPathFlag = 2;
+            }
+            myPanel.ShowPathFlag = flag;
+            if(counter == 0){
+                return 0;
+            }
+            else if(counter == 2){
+                return removeOpponents(game,myPanel,cloneLeft);
+            }
+            else if(counter == 1){
+                return removeOpponents(game,myPanel,cloneRight);
+            }
+            else{
+                return removeOpponents(game,myPanel,cloneLeft) + removeOpponents(game,myPanel,cloneRight);
             }
         }
 
-        else if(this.colour == "Black") {
-            game.CoordinatesForKills = new ArrayList<>();
-            cloneRight = new CheckerPiece(this.x + 1,this.y - 1,this.colour);
-            cloneLeft = new CheckerPiece(this.x - 1 ,this.y - 1,this.colour);
+       else{
+            int counter = 0;
+            cloneRight = new CheckerPiece(checkerPiece.x + 1,checkerPiece.y - 1,checkerPiece.colour);
+            cloneLeft = new CheckerPiece(checkerPiece.x - 1 ,checkerPiece.y - 1,checkerPiece.colour);
             myPanel.ShowPathFlag = 2;
             if (this.moveLeft(game, myPanel) == 0) {
                 myPanel.ShowPathFlag = 1;
@@ -142,6 +164,7 @@ public class CheckerPiece {
                         if (cloneLeft.moveLeft(game,myPanel) == 1){
                             game.CoordinatesForKills.add(cloneLeft.x);
                             game.CoordinatesForKills.add(cloneLeft.y);
+                            counter = counter + 2;
 
                         }
                     }
@@ -156,14 +179,26 @@ public class CheckerPiece {
                         if (cloneRight.moveRight(game,myPanel) == 1){
                             game.CoordinatesForKills.add(cloneRight.x);
                             game.CoordinatesForKills.add(cloneRight.y);
+                            counter ++;
                         }
                     }
                 }
-                myPanel.ShowPathFlag = 1;
+            }
+            myPanel.ShowPathFlag = flag;
+            if(counter == 0){
+                return 0;
+            }
+            else if(counter == 2){
+                return removeOpponents(game,myPanel,cloneLeft);
+            }
+            else if(counter == 1){
+                return removeOpponents(game,myPanel,cloneRight);
+            }
+            else{
+                System.out.println("lll");
+                return removeOpponents(game,myPanel,cloneLeft) + removeOpponents(game,myPanel,cloneRight);
             }
         }
-        myPanel.ShowPathFlag = flag;
-
     }
 
     public void ToString(){
