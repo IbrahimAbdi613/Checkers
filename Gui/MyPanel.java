@@ -3,19 +3,19 @@ import Checkers.Backend.Game;
 
 import java.awt.*;
 import javax.swing.*;
-import Checkers.Backend.checkerPiece;
+import Checkers.Backend.CheckerPiece;
 public class MyPanel extends JLayeredPane {
 
     Game game;
     public int ShowPathFlag;
-    public checkerPiece CurrentPiece;
-    public checkerPiece clone;
-    public checkerPiece[] checkerPieces;
+    public CheckerPiece CurrentPiece;
+    public CheckerPiece clone;
+    public CheckerPiece[] CheckerPieces;
     public Window window;
 
     MyPanel(Game game, Window window){
         this.window = window;
-        checkerPieces = new checkerPiece[4];
+        CheckerPieces = new CheckerPiece[4];
         CurrentPiece = null;
         clone = null;
         ShowPathFlag = 1;
@@ -31,32 +31,42 @@ public class MyPanel extends JLayeredPane {
         if(ShowPathFlag == 2){
             graphics2D.setPaint(Color.BLUE);
             if(CurrentPiece.moveLeft(game,this) == 1){
-                clone = new checkerPiece(CurrentPiece.x,CurrentPiece.y,CurrentPiece.colour);
+                clone = new CheckerPiece(CurrentPiece.x,CurrentPiece.y,CurrentPiece.colour);
                 ShowPathFlag = 1;
                 clone.moveLeft(game,this);
                 ShowPathFlag = 2;
-                checkerPieces[0] = clone;
+                CheckerPieces[0] = clone;
                 int x = 300 + clone.x * (125);
                 int y =  clone.y * (125);
                 graphics2D.fillRect(x,y,125,125);
             }
             if (CurrentPiece.moveRight(game,this) == 1){
-                clone = new checkerPiece(CurrentPiece.x,CurrentPiece.y,CurrentPiece.colour);
+                clone = new CheckerPiece(CurrentPiece.x,CurrentPiece.y,CurrentPiece.colour);
                 ShowPathFlag = 1;
                 clone.moveRight(game,this);
                 ShowPathFlag = 2;
-                checkerPieces[1] = clone;
+                CheckerPieces[1] = clone;
                 int x = 300 + clone.x * (125);
                 int y =  clone.y * (125);
                 graphics2D.fillRect(x,y,125,125);
+            }
+            CurrentPiece.removeOpponents(game,this);
+            graphics2D.setPaint(Color.RED);
+
+            for (int i = 0; i < game.CoordinatesForKills.size();i++){
+                int x = 300 + game.CoordinatesForKills.get(i) * (125);
+                int y =  game.CoordinatesForKills.get(i + 1)* (125);
+                i++;
+                graphics2D.fillRect(x,y,125,125);
+
             }
 
         }
 
         else {
-            for (int i = 0; i < checkerPieces.length; i++) {
-                if(checkerPieces[i]!=null) {
-                    if (window.ComponentClickedY == checkerPieces[i].y && window.ComponentClickedX == checkerPieces[i].x) {
+            for (int i = 0; i < CheckerPieces.length; i++) {
+                if(CheckerPieces[i]!=null) {
+                    if (window.ComponentClickedY == CheckerPieces[i].y && window.ComponentClickedX == CheckerPieces[i].x) {
                         if (i == 0) {
                             for (int j = 0; j < game.Black.length; j++) {
                                 if(game.Black[j].x == CurrentPiece.x && game.Black[j].y == CurrentPiece.y){ ;
@@ -90,7 +100,7 @@ public class MyPanel extends JLayeredPane {
 
             }
             CurrentPiece = null;
-            checkerPieces = new checkerPiece[4];
+            CheckerPieces = new CheckerPiece[4];
         }
             for (int i = 0; i < game.Black.length; i++) {
                 int x = 330 + game.Black[i].x * (125);

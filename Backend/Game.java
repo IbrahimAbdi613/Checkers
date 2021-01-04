@@ -1,7 +1,9 @@
 package Checkers.Backend;
 
 import java.awt.Canvas;
+import java.util.ArrayList;
 
+import Checkers.Gui.MyPanel;
 import Checkers.Gui.Window;
 
 public class Game extends Canvas implements Runnable {
@@ -10,15 +12,16 @@ public class Game extends Canvas implements Runnable {
      */
     private static final long serialVersionUID = 1L;
     public Board board;
-    public checkerPiece[] Red;
-    public checkerPiece[] Black;
+    public CheckerPiece[] Red;
+    public CheckerPiece[] Black;
     public static final int WIDTH = 1600, HEIGHT = 1040;
+    public ArrayList<Integer> CoordinatesForKills;
 
 
     public Game(int dimension) {
         board = new Board(dimension);
-        Red = new checkerPiece[12];
-        Black = new checkerPiece[12];
+        Red = new CheckerPiece[12];
+        Black = new CheckerPiece[12];
         int x = 0;
         int x2 = 0;
         int y = -1;
@@ -33,8 +36,8 @@ public class Game extends Canvas implements Runnable {
                     x2 = 0;
                 }
             }
-            Red[i] = new checkerPiece(x, 7 - y, "Black");
-            Black[i] = new checkerPiece(x2, y, "Red");
+            Red[i] = new CheckerPiece(x, y, "Red");
+            Black[i] = new CheckerPiece(x2, 7- y, "Black");
             x = x + 2;
             x2 = x2 + 2;
         }
@@ -44,12 +47,12 @@ public class Game extends Canvas implements Runnable {
 
     public void printGame() {
         System.out.println("Black");
-        for (checkerPiece checkerPiece : Red) {
+        for (CheckerPiece checkerPiece : Red) {
             System.out.println("The X value is " + checkerPiece.x + " and the y value is " + checkerPiece.y
                     + " the colour is " + checkerPiece.colour);
         }
         System.out.println("\n\nRed");
-        for (checkerPiece checkerPiece : Black) {
+        for (CheckerPiece checkerPiece : Black) {
             System.out.println("The X value is " + checkerPiece.x + " and the y value is " + checkerPiece.y
                     + " the colour is " + checkerPiece.colour);
         }

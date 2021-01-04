@@ -1,7 +1,6 @@
 package Checkers.Gui;
 
 import Checkers.Backend.Game;
-import Checkers.Backend.checkerPiece;
 
 
 import java.awt.*;
