@@ -116,7 +116,15 @@ public class CheckerPiece {
                             game.CoordinatesForKills.add(cloneLeft.x);
                             game.CoordinatesForKills.add(cloneLeft.y);
                             counter = counter + 2;
-                            System.out.println("lll");
+                            if(myPanel.remove == 1){
+                                int cloneDiff  = (cloneLeft.x + myPanel.CurrentPiece.x) + (cloneLeft.y + myPanel.CurrentPiece.y);
+                                game.Black[i].x = -4;
+                                if(cloneDiff == myPanel.difference){
+                                    this.x = cloneLeft.x;
+                                    this.y = cloneLeft.y;
+                                    return 0;
+                                }
+                            }
                         }
                     }
                 }
@@ -131,8 +139,15 @@ public class CheckerPiece {
                             game.CoordinatesForKills.add(cloneRight.x);
                             game.CoordinatesForKills.add(cloneRight.y);
                             counter ++;
-                            System.out.println("lll");
-
+                            if(myPanel.remove == 1){
+                                int cloneDiff  = (cloneRight.x + myPanel.CurrentPiece.x) + (cloneRight.y + myPanel.CurrentPiece.y);
+                                game.Black[i].x = -4;
+                                if(cloneDiff == myPanel.difference){
+                                    this.x = cloneRight.x;
+                                    this.y = cloneRight.y;
+                                    return 0;
+                                }
+                            }
                         }
                     }
                 }
@@ -165,7 +180,15 @@ public class CheckerPiece {
                             game.CoordinatesForKills.add(cloneLeft.x);
                             game.CoordinatesForKills.add(cloneLeft.y);
                             counter = counter + 2;
-
+                            if(myPanel.remove == 1){
+                                int cloneDiff  = (cloneLeft.x + myPanel.CurrentPiece.x) + (cloneLeft.y + myPanel.CurrentPiece.y);
+                                game.Red[i].x = -4;
+                                if(cloneDiff == myPanel.difference){
+                                    this.x = cloneLeft.x;
+                                    this.y = cloneLeft.y;
+                                    return 0;
+                                }
+                            }
                         }
                     }
                 }
@@ -180,6 +203,15 @@ public class CheckerPiece {
                             game.CoordinatesForKills.add(cloneRight.x);
                             game.CoordinatesForKills.add(cloneRight.y);
                             counter ++;
+                            if(myPanel.remove == 1){
+                                int cloneDiff  = (cloneRight.x + myPanel.CurrentPiece.x) + (cloneRight.y + myPanel.CurrentPiece.y);
+                                game.Red[i].x = -4;
+                                if(cloneDiff == myPanel.difference){
+                                    this.x = cloneRight.x;
+                                    this.y = cloneRight.y;
+                                    return 0;
+                                }
+                            }
                         }
                     }
                 }
@@ -195,7 +227,6 @@ public class CheckerPiece {
                 return removeOpponents(game,myPanel,cloneRight);
             }
             else{
-                System.out.println("lll");
                 return removeOpponents(game,myPanel,cloneLeft) + removeOpponents(game,myPanel,cloneRight);
             }
         }

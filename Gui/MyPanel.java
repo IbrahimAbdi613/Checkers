@@ -2,6 +2,7 @@ package Checkers.Gui;
 import Checkers.Backend.Game;
 
 import java.awt.*;
+import java.util.ArrayList;
 import javax.swing.*;
 import Checkers.Backend.CheckerPiece;
 public class MyPanel extends JLayeredPane {
@@ -13,6 +14,7 @@ public class MyPanel extends JLayeredPane {
     public CheckerPiece[] CheckerPieces;
     public Window window;
     public int remove;
+    public int difference;
 
     MyPanel(Game game, Window window){
         this.window = window;
@@ -24,7 +26,9 @@ public class MyPanel extends JLayeredPane {
         this.setPreferredSize(new Dimension(1600,1000));
         this.setMinimumSize(new Dimension(1600, 1000));
         this.setBounds(0,0,1600,1000);
-
+        remove = 0;
+        game.CoordinatesForKills = new ArrayList<>();
+        difference = 0;
     }
 
     public void paintComponent(Graphics g){
@@ -59,13 +63,11 @@ public class MyPanel extends JLayeredPane {
                 int y =  game.CoordinatesForKills.get(i + 1)* (125);
                 i++;
                 graphics2D.fillRect(x,y,125,125);
-
             }
-
         }
 
         else {
-
+            this.remove = 1;
             for (int i = 0; i < CheckerPieces.length; i++) {
                 if(CheckerPieces[i]!=null) {
                     if (window.ComponentClickedY == CheckerPieces[i].y && window.ComponentClickedX == CheckerPieces[i].x) {
@@ -99,11 +101,19 @@ public class MyPanel extends JLayeredPane {
                         }
                     }
                 }
-
             }
-
+            for(int i = 0; i < game.CoordinatesForKills.size(); i++){
+                if(game.CoordinatesForKills.get(i) != null && game.CoordinatesForKills.get(i + 1) != null) {
+                    if(game.CoordinatesForKills.get(i) == window.ComponentClickedX && game.CoordinatesForKills.get(i + 1) == window.ComponentClickedY ){
+                        difference = (CurrentPiece.x + window.ComponentClickedX) + (CurrentPiece.y + window.ComponentClickedY);
+                        CurrentPiece.removeOpponents(game,this);
+                    }
+                }
+                i++;
+            }
             CurrentPiece = null;
             CheckerPieces = new CheckerPiece[4];
+            this.remove = 0;
         }
             for (int i = 0; i < game.Black.length; i++) {
                 if(game.Black[i].x > -2){
@@ -127,7 +137,5 @@ public class MyPanel extends JLayeredPane {
                     graphics2D.fillOval(x + 3, y + 3, 54, 54);
                 }
             }
-
     }
-
 }
