@@ -34,31 +34,52 @@ public class MyPanel extends JLayeredPane {
         if(ShowPathFlag == 2){
             graphics2D.setPaint(Color.BLUE);
             if(CurrentPiece.moveLeft(game,this) == 1){
-                clone = new CheckerPiece(CurrentPiece.x,CurrentPiece.y,CurrentPiece.colour);
+                clone = new CheckerPiece(CurrentPiece.x,CurrentPiece.y,CurrentPiece.colour,CurrentPiece.King);
                 ShowPathFlag = 1;
                 clone.moveLeft(game,this);
                 ShowPathFlag = 2;
                 CheckerPieces[0] = clone;
                 int x = 300 + clone.x * (125);
-                int y =  clone.y * (125);
+                int y = clone.y * (125);
                 graphics2D.fillRect(x,y,125,125);
             }
             if (CurrentPiece.moveRight(game,this) == 1){
-                clone = new CheckerPiece(CurrentPiece.x,CurrentPiece.y,CurrentPiece.colour);
+                clone = new CheckerPiece(CurrentPiece.x,CurrentPiece.y,CurrentPiece.colour,CurrentPiece.King);
                 ShowPathFlag = 1;
                 clone.moveRight(game,this);
                 ShowPathFlag = 2;
                 CheckerPieces[1] = clone;
                 int x = 300 + clone.x * (125);
-                int y =  clone.y * (125);
+                int y = clone.y * (125);
                 graphics2D.fillRect(x,y,125,125);
             }
+            if (CurrentPiece.KingMoveBackRight(game,this) == 1){
+                clone = new CheckerPiece(CurrentPiece.x,CurrentPiece.y,CurrentPiece.colour,CurrentPiece.King);
+                ShowPathFlag = 1;
+                clone.KingMoveBackRight(game,this);
+                ShowPathFlag = 2;
+                CheckerPieces[2] = clone;
+                int x = 300 + clone.x * (125);
+                int y = clone.y * (125);
+                graphics2D.fillRect(x,y,125,125);
+            }
+            if (CurrentPiece.KingMoveBackLeft(game,this) == 1){
+                clone = new CheckerPiece(CurrentPiece.x,CurrentPiece.y,CurrentPiece.colour,CurrentPiece.King);
+                ShowPathFlag = 1;
+                clone.KingMoveBackLeft(game,this);
+                ShowPathFlag = 2;
+                CheckerPieces[3] = clone;
+                int x = 300 + clone.x * (125);
+                int y = clone.y * (125);
+                graphics2D.fillRect(x,y,125,125);
+            }
+
             CurrentPiece.removeOpponents(game,this);
             graphics2D.setPaint(Color.RED);
 
             for (int i = 0; i < game.CoordinatesForKills.size();i++){
                 int x = 300 + game.CoordinatesForKills.get(i) * (125);
-                int y =  game.CoordinatesForKills.get(i + 1)* (125);
+                int y = game.CoordinatesForKills.get(i + 1)* (125);
                 i++;
                 graphics2D.fillRect(x,y,125,125);
             }
@@ -117,6 +138,9 @@ public class MyPanel extends JLayeredPane {
                     int x = 330 + game.Black[i].x * (125);
                     int y = 30 + game.Black[i].y * (125);
                     graphics2D.setPaint(Color.WHITE);
+                    if(game.Black[i].King){
+                        graphics2D.setPaint(new Color(218,165,32));
+                    }
                     graphics2D.fillOval(x, y, 60, 60);
                     graphics2D.setPaint(Color.RED);
                     graphics2D.fillOval(x + 3, y + 3, 54, 54);
@@ -129,6 +153,9 @@ public class MyPanel extends JLayeredPane {
                     int x = 330 + game.Red[i].x * (125);
                     int y = 30 + game.Red[i].y * (125);
                     graphics2D.setPaint(Color.WHITE);
+                    if(game.Red[i].King){
+                        graphics2D.setPaint(new Color(218,165,32));
+                    }
                     graphics2D.fillOval(x, y, 60, 60);
                     graphics2D.setPaint(new Color(40, 40, 40));
                     graphics2D.fillOval(x + 3, y + 3, 54, 54);

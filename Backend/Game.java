@@ -36,8 +36,8 @@ public class Game extends Canvas implements Runnable {
                     x2 = 0;
                 }
             }
-            Red[i] = new CheckerPiece(x, y, "Red");
-            Black[i] = new CheckerPiece(x2, 7- y, "Black");
+            Red[i] = new CheckerPiece(x, y, "Red",false);
+            Black[i] = new CheckerPiece(x2, 7- y, "Black",false);
             x = x + 2;
             x2 = x2 + 2;
         }
@@ -48,13 +48,11 @@ public class Game extends Canvas implements Runnable {
     public void printGame() {
         System.out.println("Black");
         for (CheckerPiece checkerPiece : Red) {
-            System.out.println("The X value is " + checkerPiece.x + " and the y value is " + checkerPiece.y
-                    + " the colour is " + checkerPiece.colour);
+            checkerPiece.ToString();
         }
         System.out.println("\n\nRed");
         for (CheckerPiece checkerPiece : Black) {
-            System.out.println("The X value is " + checkerPiece.x + " and the y value is " + checkerPiece.y
-                    + " the colour is " + checkerPiece.colour);
+            checkerPiece.ToString();
         }
 
         System.out.println("\n\nThis is the board");

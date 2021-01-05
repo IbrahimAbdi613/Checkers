@@ -10,11 +10,11 @@ public class CheckerPiece {
     public String colour;
     public Boolean King;
 
-    public CheckerPiece(int x, int y, String colour) {
+    public CheckerPiece(int x, int y, String colour, boolean king) {
         this.x = x;
         this.y = y;
         this.colour = colour;
-        King = false;
+        King = king;
     }
 
     public int moveRight(Game game, MyPanel myPanel) {
@@ -28,11 +28,12 @@ public class CheckerPiece {
                 if(myPanel.ShowPathFlag == 1){
                     x++;
                     y++;
+                    if (this.y == game.board.Dimension - 1) {
+                        this.King = true;
+                    }
                 }
 
-                if (this.y == game.board.Dimension - 1) {
-                    this.King = true;
-                }
+
                 return 1;
             }
         }
@@ -46,10 +47,11 @@ public class CheckerPiece {
                 if(myPanel.ShowPathFlag == 1) {
                     x++;
                     y--;
+                    if (this.y == 0) {
+                        this.King = true;
+                    }
                 }
-                if (this.y == 0) {
-                    this.King = true;
-                }
+
                 return 1;
             }
         }
@@ -67,10 +69,11 @@ public class CheckerPiece {
                 if(myPanel.ShowPathFlag == 1) {
                     x--;
                     y++;
+                    if (this.y == game.board.Dimension - 1) {
+                        this.King = true;
+                    }
                 }
-                if (this.y == game.board.Dimension - 1) {
-                    this.King = true;
-                }
+
                 return 1;
             }
         }
@@ -84,9 +87,9 @@ public class CheckerPiece {
                 if(myPanel.ShowPathFlag == 1) {
                     x--;
                     y--;
-                }
-                if (this.y == 0) {
-                    this.King = true;
+                    if (this.y == 0) {
+                        this.King = true;
+                    }
                 }
                 return 1;
             }
@@ -105,8 +108,8 @@ public class CheckerPiece {
         CheckerPiece cloneLeft;
         if (checkerPiece.colour == "Red") {
             int counter = 0;
-            cloneRight = new CheckerPiece(checkerPiece.x + 1, checkerPiece.y + 1, checkerPiece.colour);
-            cloneLeft = new CheckerPiece(checkerPiece.x - 1, checkerPiece.y + 1, checkerPiece.colour);
+            cloneRight = new CheckerPiece(checkerPiece.x + 1, checkerPiece.y + 1, checkerPiece.colour,checkerPiece.King);
+            cloneLeft = new CheckerPiece(checkerPiece.x - 1, checkerPiece.y + 1, checkerPiece.colour,checkerPiece.King);
             myPanel.ShowPathFlag = 2;
             if (checkerPiece.moveLeft(game, myPanel) == 0) {
                 myPanel.ShowPathFlag = 1;
@@ -167,8 +170,8 @@ public class CheckerPiece {
 
        else{
             int counter = 0;
-            cloneRight = new CheckerPiece(checkerPiece.x + 1,checkerPiece.y - 1,checkerPiece.colour);
-            cloneLeft = new CheckerPiece(checkerPiece.x - 1 ,checkerPiece.y - 1,checkerPiece.colour);
+            cloneRight = new CheckerPiece(checkerPiece.x + 1,checkerPiece.y - 1,checkerPiece.colour, checkerPiece.King);
+            cloneLeft = new CheckerPiece(checkerPiece.x - 1 ,checkerPiece.y - 1,checkerPiece.colour, checkerPiece.King);
             myPanel.ShowPathFlag = 2;
             if (this.moveLeft(game, myPanel) == 0) {
                 myPanel.ShowPathFlag = 1;
@@ -226,6 +229,81 @@ public class CheckerPiece {
                 return removeOpponents(game,myPanel,cloneLeft) + removeOpponents(game,myPanel,cloneRight);
             }
         }
+    }
+
+    public int KingMoveBackLeft(Game game, MyPanel myPanel) {
+        if (this.King) {
+            if (this.colour == "Black") {
+                if ((x - 1 > -1) && (y + 1) < (game.board.Dimension)) {
+                    for (int i = 0; i < game.Black.length; i++) {
+                        if ((game.Black[i].x == this.x - 1 && game.Black[i].y == this.y + 1) || (game.Red[i].x == this.x - 1 && game.Red[i].y == this.y + 1)) {
+                            return 0;
+                        }
+                    }
+                    if (myPanel.ShowPathFlag == 1) {
+                        x--;
+                        y++;
+                        System.out.println("moved");
+                    }
+
+                    return 1;
+                }
+            }
+            if (this.colour.equals("Red")) {
+                if ((x - 1 > -1) && (y - 1 > -1)) {
+                    for (int i = 0; i < game.Black.length; i++) {
+                        if ((game.Black[i].x == this.x - 1 && game.Black[i].y == this.y - 1) || (game.Red[i].x == this.x - 1 && game.Red[i].y == this.y - 1)) {
+                            return 0;
+                        }
+                    }
+                    if (myPanel.ShowPathFlag == 1) {
+                        x--;
+                        y--;
+                        System.out.println("moved");
+                    }
+                    return 1;
+                }
+            }
+            return 0;
+        }
+        return 0;
+    }
+
+    public int KingMoveBackRight(Game game, MyPanel  myPanel){
+        if(this.King){
+            if (this.colour == "Black") {
+                if ((x + 1) < (game.board.Dimension) && (y + 1) < (game.board.Dimension)) {
+                    for (int i = 0; i < game.Black.length; i++) {
+                        if((game.Black[i].x == this.x + 1 && game.Black[i].y == this.y + 1) || (game.Red[i].x == this.x + 1 && game.Red[i].y == this.y + 1)){
+                            return 0;
+                        }
+                    }
+                    if(myPanel.ShowPathFlag == 1){
+                        System.out.println("moved");
+                        x++;
+                        y++;
+                    }
+                    return 1;
+                }
+            }
+            if (this.colour == "Red") {
+                if ((x + 1) < (game.board.Dimension) && (y - 1) > -1) {
+                    for (int i = 0; i < game.Black.length; i++) {
+                        if((game.Black[i].x == this.x + 1 && game.Black[i].y == this.y - 1) ||(game.Red[i].x == this.x + 1 && game.Red[i].y == this.y - 1)){
+                            return 0;
+                        }
+                    }
+                    if(myPanel.ShowPathFlag == 1) {
+                        x++;
+                        y--;
+                        System.out.println("moved");
+                    }
+                    return 1;
+                }
+            }
+            return 0;
+        }
+        return 0;
     }
 
     public void ToString(){
