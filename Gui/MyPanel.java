@@ -7,14 +7,13 @@ import javax.swing.*;
 import Checkers.Backend.CheckerPiece;
 public class MyPanel extends JLayeredPane {
 
-    Game game;
+     Game game;
     public int ShowPathFlag;
     public CheckerPiece CurrentPiece;
     public CheckerPiece clone;
     public CheckerPiece[] CheckerPieces;
     public Window window;
     public int remove;
-    public int difference;
 
     MyPanel(Game game, Window window){
         this.window = window;
@@ -28,7 +27,6 @@ public class MyPanel extends JLayeredPane {
         this.setBounds(0,0,1600,1000);
         remove = 0;
         game.CoordinatesForKills = new ArrayList<>();
-        difference = 0;
     }
 
     public void paintComponent(Graphics g){
@@ -105,7 +103,6 @@ public class MyPanel extends JLayeredPane {
             for(int i = 0; i < game.CoordinatesForKills.size(); i++){
                 if(game.CoordinatesForKills.get(i) != null && game.CoordinatesForKills.get(i + 1) != null) {
                     if(game.CoordinatesForKills.get(i) == window.ComponentClickedX && game.CoordinatesForKills.get(i + 1) == window.ComponentClickedY ){
-                        difference = (CurrentPiece.x + window.ComponentClickedX) + (CurrentPiece.y + window.ComponentClickedY);
                         CurrentPiece.removeOpponents(game,this);
                     }
                 }
