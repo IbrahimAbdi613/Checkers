@@ -1,7 +1,6 @@
 package Checkers.Backend;
 
 import Checkers.Gui.MyPanel;
-
 import java.util.ArrayList;
 
 public class CheckerPiece {
@@ -97,7 +96,7 @@ public class CheckerPiece {
         return 0;
     }
 
-    public void removeOpponents(Game game,MyPanel myPanel){
+    public void removeOpponents(Game game,MyPanel myPanel) {
         game.CoordinatesForKills = new ArrayList<>();
         removeOpponents(game,myPanel,this);
     }
@@ -243,7 +242,6 @@ public class CheckerPiece {
                     if (myPanel.ShowPathFlag == 1) {
                         x--;
                         y++;
-                        System.out.println("moved");
                     }
 
                     return 1;
@@ -259,7 +257,6 @@ public class CheckerPiece {
                     if (myPanel.ShowPathFlag == 1) {
                         x--;
                         y--;
-                        System.out.println("moved");
                     }
                     return 1;
                 }
@@ -269,7 +266,7 @@ public class CheckerPiece {
         return 0;
     }
 
-    public int KingMoveBackRight(Game game, MyPanel  myPanel){
+    public int KingMoveBackRight(Game game, MyPanel  myPanel) {
         if(this.King){
             if (this.colour == "Black") {
                 if ((x + 1) < (game.board.Dimension) && (y + 1) < (game.board.Dimension)) {
@@ -279,7 +276,6 @@ public class CheckerPiece {
                         }
                     }
                     if(myPanel.ShowPathFlag == 1){
-                        System.out.println("moved");
                         x++;
                         y++;
                     }
@@ -296,7 +292,6 @@ public class CheckerPiece {
                     if(myPanel.ShowPathFlag == 1) {
                         x++;
                         y--;
-                        System.out.println("moved");
                     }
                     return 1;
                 }

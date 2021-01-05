@@ -92,12 +92,10 @@ public class MyPanel extends JLayeredPane {
                     if (window.ComponentClickedY == CheckerPieces[i].y && window.ComponentClickedX == CheckerPieces[i].x) {
                         if (i == 0) {
                             for (int j = 0; j < game.Black.length; j++) {
-                                if(game.Black[j].x == CurrentPiece.x && game.Black[j].y == CurrentPiece.y){ ;
+                                if(game.Black[j].x == CurrentPiece.x && game.Black[j].y == CurrentPiece.y){
                                     game.Black[j].moveLeft(game,this);
                                     break;
                                 }
-                            }
-                            for (int j = 0; j < game.Red.length; j++) {
                                 if(game.Red[j].x == CurrentPiece.x && game.Red[j].y == CurrentPiece.y){
                                     game.Red[j].moveLeft(game,this);
                                     break;
@@ -110,10 +108,32 @@ public class MyPanel extends JLayeredPane {
                                     game.Black[j].moveRight(game,this);
                                     break;
                                 }
-                            }
-                            for (int j = 0; j < game.Red.length; j++) {
                                 if(game.Red[j].x==CurrentPiece.x && game.Red[j].y == CurrentPiece.y){
                                     game.Red[j].moveRight(game,this);
+                                    break;
+                                }
+                            }
+                        }
+                        else if(i == 2){
+                            for (int j = 0; j < game.Black.length; j++) {
+                                if(game.Black[j].x==CurrentPiece.x && game.Black[j].y == CurrentPiece.y){
+                                    game.Black[j].KingMoveBackRight(game,this);
+                                    break;
+                                }
+                                if(game.Red[j].x==CurrentPiece.x && game.Red[j].y == CurrentPiece.y){
+                                    game.Red[j].KingMoveBackRight(game,this);
+                                    break;
+                                }
+                            }
+                        }
+                        else if(i == 3){
+                            for (int j = 0; j < game.Black.length; j++) {
+                                if(game.Black[j].x==CurrentPiece.x && game.Black[j].y == CurrentPiece.y){
+                                    game.Black[j].KingMoveBackLeft(game,this);
+                                    break;
+                                }
+                                if(game.Red[j].x==CurrentPiece.x && game.Red[j].y == CurrentPiece.y){
+                                    game.Red[j].KingMoveBackLeft(game,this);
                                     break;
                                 }
                             }
