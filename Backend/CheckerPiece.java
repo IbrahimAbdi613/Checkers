@@ -27,9 +27,7 @@ public class CheckerPiece {
                 if(myPanel.ShowPathFlag == 1){
                     x++;
                     y++;
-                    if (this.y == game.board.Dimension - 1) {
-                        this.King = true;
-                    }
+                    this.isKing();
                 }
 
 
@@ -46,9 +44,7 @@ public class CheckerPiece {
                 if(myPanel.ShowPathFlag == 1) {
                     x++;
                     y--;
-                    if (this.y == 0) {
-                        this.King = true;
-                    }
+                    this.isKing();
                 }
 
                 return 1;
@@ -68,9 +64,7 @@ public class CheckerPiece {
                 if(myPanel.ShowPathFlag == 1) {
                     x--;
                     y++;
-                    if (this.y == game.board.Dimension - 1) {
-                        this.King = true;
-                    }
+                    this.isKing();
                 }
 
                 return 1;
@@ -86,9 +80,7 @@ public class CheckerPiece {
                 if(myPanel.ShowPathFlag == 1) {
                     x--;
                     y--;
-                    if (this.y == 0) {
-                        this.King = true;
-                    }
+                    this.isKing();
                 }
                 return 1;
             }
@@ -128,6 +120,7 @@ public class CheckerPiece {
                                 if(cloneLeft.x == myPanel.window.ComponentClickedX && cloneLeft.y == myPanel.window.ComponentClickedY){
                                     this.x = cloneLeft.x;
                                     this.y = cloneLeft.y;
+                                    this.isKing();
                                     return 0;
                                 }
                             }
@@ -150,6 +143,7 @@ public class CheckerPiece {
                                 if(cloneRight.x == myPanel.window.ComponentClickedX && cloneRight.y == myPanel.window.ComponentClickedY){
                                     this.x = cloneRight.x;
                                     this.y = cloneRight.y;
+                                    this.isKing();
                                     return 0;
                                 }
                             }
@@ -234,6 +228,7 @@ public class CheckerPiece {
                                 if(cloneLeft.x == myPanel.window.ComponentClickedX && cloneLeft.y == myPanel.window.ComponentClickedY){
                                     this.x = cloneLeft.x;
                                     this.y = cloneLeft.y;
+                                    this.isKing();
                                     return 0;
                                 }
                             }
@@ -256,6 +251,7 @@ public class CheckerPiece {
                                 if(cloneRight.x == myPanel.window.ComponentClickedX && cloneRight.y == myPanel.window.ComponentClickedY){
                                     this.x = cloneRight.x;
                                     this.y = cloneRight.y;
+                                    this.isKing();
                                     return 0;
                                 }
                             }
@@ -266,14 +262,14 @@ public class CheckerPiece {
             myPanel.ShowPathFlag = 2;
             if (checkerPiece.King && checkerPiece.KingMoveBackRight(game, myPanel) == 0) {
                 myPanel.ShowPathFlag = 1;
-                for (int i = 0; i < game.Black.length; i++) {
-                    if (cloneBackRight.x == game.Black[i].x && cloneBackRight.y == game.Black[i].y) {
+                for (int i = 0; i < game.Red.length; i++) {
+                    if (cloneBackRight.x == game.Red[i].x && cloneBackRight.y == game.Red[i].y) {
                         if (cloneBackRight.KingMoveBackRight(game, myPanel) == 1) {
                             game.CoordinatesForKills.add(cloneBackRight.x);
                             game.CoordinatesForKills.add(cloneBackRight.y);
                             counter ++;
                             if(myPanel.remove == 1){
-                                game.Black[i].x = -4;
+                                game.Red[i].x = -4;
                                 if(cloneBackRight.x == myPanel.window.ComponentClickedX && cloneBackRight.y == myPanel.window.ComponentClickedY){
                                     this.x = cloneBackRight.x;
                                     this.y = cloneBackRight.y;
@@ -287,14 +283,14 @@ public class CheckerPiece {
             myPanel.ShowPathFlag = 2;
             if (checkerPiece.King && checkerPiece.KingMoveBackLeft(game, myPanel) == 0) {
                 myPanel.ShowPathFlag = 1;
-                for (int i = 0; i < game.Black.length; i++) {
-                    if (cloneBackLeft.x == game.Black[i].x && cloneBackLeft.y == game.Black[i].y) {
+                for (int i = 0; i < game.Red.length; i++) {
+                    if (cloneBackLeft.x == game.Red[i].x && cloneBackLeft.y == game.Red[i].y) {
                         if (cloneBackLeft.KingMoveBackLeft(game, myPanel) == 1) {
                             game.CoordinatesForKills.add(cloneBackLeft.x);
                             game.CoordinatesForKills.add(cloneBackLeft.y);
                             counter ++;
                             if(myPanel.remove == 1){
-                                game.Black[i].x = -4;
+                                game.Red[i].x = -4;
                                 if(cloneBackLeft.x == myPanel.window.ComponentClickedX && cloneBackLeft.y == myPanel.window.ComponentClickedY){
                                     this.x = cloneBackLeft.x;
                                     this.y = cloneBackLeft.y;
@@ -390,6 +386,17 @@ public class CheckerPiece {
             return 0;
         }
         return 0;
+    }
+
+    public void isKing(){
+        if(this.colour == "Red"){
+            if (this.y == 7)
+                this.King = true;
+        }
+        else{
+            if(this.y == 0)
+                this.King = true;
+        }
     }
 
     public void ToString(){
