@@ -105,10 +105,15 @@ public class CheckerPiece {
         int flag = myPanel.ShowPathFlag;
         CheckerPiece cloneRight;
         CheckerPiece cloneLeft;
+        CheckerPiece cloneBackRight;
+        CheckerPiece cloneBackLeft;
+
         if (checkerPiece.colour == "Red") {
             int counter = 0;
             cloneRight = new CheckerPiece(checkerPiece.x + 1, checkerPiece.y + 1, checkerPiece.colour,checkerPiece.King);
             cloneLeft = new CheckerPiece(checkerPiece.x - 1, checkerPiece.y + 1, checkerPiece.colour,checkerPiece.King);
+            cloneBackRight = new CheckerPiece(checkerPiece.x + 1, checkerPiece.y - 1, checkerPiece.colour,checkerPiece.King);
+            cloneBackLeft = new CheckerPiece(checkerPiece.x  - 1, checkerPiece.y - 1, checkerPiece.colour,checkerPiece.King);
             myPanel.ShowPathFlag = 2;
             if (checkerPiece.moveLeft(game, myPanel) == 0) {
                 myPanel.ShowPathFlag = 1;
@@ -152,6 +157,48 @@ public class CheckerPiece {
                     }
                 }
             }
+            myPanel.ShowPathFlag = 2;
+            if (checkerPiece.King && checkerPiece.KingMoveBackRight(game, myPanel) == 0) {
+                myPanel.ShowPathFlag = 1;
+                for (int i = 0; i < game.Black.length; i++) {
+                    if (cloneBackRight.x == game.Black[i].x && cloneBackRight.y == game.Black[i].y) {
+                        if (cloneBackRight.KingMoveBackRight(game, myPanel) == 1) {
+                            game.CoordinatesForKills.add(cloneBackRight.x);
+                            game.CoordinatesForKills.add(cloneBackRight.y);
+                            counter ++;
+                            if(myPanel.remove == 1){
+                                game.Black[i].x = -4;
+                                if(cloneBackRight.x == myPanel.window.ComponentClickedX && cloneBackRight.y == myPanel.window.ComponentClickedY){
+                                    this.x = cloneBackRight.x;
+                                    this.y = cloneBackRight.y;
+                                    return 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            myPanel.ShowPathFlag = 2;
+            if (checkerPiece.King && checkerPiece.KingMoveBackLeft(game, myPanel) == 0) {
+                myPanel.ShowPathFlag = 1;
+                for (int i = 0; i < game.Black.length; i++) {
+                    if (cloneBackLeft.x == game.Black[i].x && cloneBackLeft.y == game.Black[i].y) {
+                        if (cloneBackLeft.KingMoveBackLeft(game, myPanel) == 1) {
+                            game.CoordinatesForKills.add(cloneBackLeft.x);
+                            game.CoordinatesForKills.add(cloneBackLeft.y);
+                            counter ++;
+                            if(myPanel.remove == 1){
+                                game.Black[i].x = -4;
+                                if(cloneBackLeft.x == myPanel.window.ComponentClickedX && cloneBackLeft.y == myPanel.window.ComponentClickedY){
+                                    this.x = cloneBackLeft.x;
+                                    this.y = cloneBackLeft.y;
+                                    return 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
             myPanel.ShowPathFlag = flag;
             if(counter == 0){
                 return 0;
@@ -171,6 +218,8 @@ public class CheckerPiece {
             int counter = 0;
             cloneRight = new CheckerPiece(checkerPiece.x + 1,checkerPiece.y - 1,checkerPiece.colour, checkerPiece.King);
             cloneLeft = new CheckerPiece(checkerPiece.x - 1 ,checkerPiece.y - 1,checkerPiece.colour, checkerPiece.King);
+            cloneBackRight = new CheckerPiece(checkerPiece.x + 1, checkerPiece.y + 1, checkerPiece.colour,checkerPiece.King);
+            cloneBackLeft = new CheckerPiece(checkerPiece.x  - 1, checkerPiece.y + 1, checkerPiece.colour,checkerPiece.King);
             myPanel.ShowPathFlag = 2;
             if (this.moveLeft(game, myPanel) == 0) {
                 myPanel.ShowPathFlag = 1;
@@ -207,6 +256,48 @@ public class CheckerPiece {
                                 if(cloneRight.x == myPanel.window.ComponentClickedX && cloneRight.y == myPanel.window.ComponentClickedY){
                                     this.x = cloneRight.x;
                                     this.y = cloneRight.y;
+                                    return 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            myPanel.ShowPathFlag = 2;
+            if (checkerPiece.King && checkerPiece.KingMoveBackRight(game, myPanel) == 0) {
+                myPanel.ShowPathFlag = 1;
+                for (int i = 0; i < game.Black.length; i++) {
+                    if (cloneBackRight.x == game.Black[i].x && cloneBackRight.y == game.Black[i].y) {
+                        if (cloneBackRight.KingMoveBackRight(game, myPanel) == 1) {
+                            game.CoordinatesForKills.add(cloneBackRight.x);
+                            game.CoordinatesForKills.add(cloneBackRight.y);
+                            counter ++;
+                            if(myPanel.remove == 1){
+                                game.Black[i].x = -4;
+                                if(cloneBackRight.x == myPanel.window.ComponentClickedX && cloneBackRight.y == myPanel.window.ComponentClickedY){
+                                    this.x = cloneBackRight.x;
+                                    this.y = cloneBackRight.y;
+                                    return 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            myPanel.ShowPathFlag = 2;
+            if (checkerPiece.King && checkerPiece.KingMoveBackLeft(game, myPanel) == 0) {
+                myPanel.ShowPathFlag = 1;
+                for (int i = 0; i < game.Black.length; i++) {
+                    if (cloneBackLeft.x == game.Black[i].x && cloneBackLeft.y == game.Black[i].y) {
+                        if (cloneBackLeft.KingMoveBackLeft(game, myPanel) == 1) {
+                            game.CoordinatesForKills.add(cloneBackLeft.x);
+                            game.CoordinatesForKills.add(cloneBackLeft.y);
+                            counter ++;
+                            if(myPanel.remove == 1){
+                                game.Black[i].x = -4;
+                                if(cloneBackLeft.x == myPanel.window.ComponentClickedX && cloneBackLeft.y == myPanel.window.ComponentClickedY){
+                                    this.x = cloneBackLeft.x;
+                                    this.y = cloneBackLeft.y;
                                     return 0;
                                 }
                             }

@@ -7,7 +7,7 @@ import javax.swing.*;
 import Checkers.Backend.CheckerPiece;
 public class MyPanel extends JLayeredPane {
 
-     Game game;
+    Game game;
     public int ShowPathFlag;
     public CheckerPiece CurrentPiece;
     public CheckerPiece clone;
