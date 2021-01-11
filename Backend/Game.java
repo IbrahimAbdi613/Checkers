@@ -3,6 +3,7 @@ package Checkers.Backend;
 import java.awt.Canvas;
 import java.util.ArrayList;
 
+import Checkers.Gui.LaunchPage;
 import Checkers.Gui.MyPanel;
 import Checkers.Gui.Window;
 
@@ -16,9 +17,15 @@ public class Game extends Canvas implements Runnable {
     public CheckerPiece[] Black;
     public static final int WIDTH = 1600, HEIGHT = 1040;
     public ArrayList<Integer> CoordinatesForKills;
+    public Player player1;
+    public Player player2;
 
 
-    public Game(int dimension) {
+
+
+    public Game(int dimension, String player1Name, String player2Name ) {
+
+
         board = new Board(dimension);
         Red = new CheckerPiece[12];
         Black = new CheckerPiece[12];
@@ -41,6 +48,10 @@ public class Game extends Canvas implements Runnable {
             x = x + 2;
             x2 = x2 + 2;
         }
+
+        player1 = new Player(player1Name,this,"Red");
+        player2= new Player(player2Name,this,"Black");
+
         new Window(WIDTH, HEIGHT, "Checkers (By Ibrahim Abdirahman)", this);
 
     }
@@ -70,8 +81,7 @@ public class Game extends Canvas implements Runnable {
     }
 
     public static void main(String[] args) {
-        Game game = new Game(8);
-        //game.printGame();
+        new LaunchPage();
 
     }
 }

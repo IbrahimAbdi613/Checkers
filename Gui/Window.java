@@ -16,6 +16,10 @@ public class Window extends JLabel implements MouseListener  {
     public int ShowPathFlag;
     public int ComponentClickedX ;
     public int ComponentClickedY ;
+    JLabel jLabel = new JLabel();
+    JPanel jPanel = new JPanel();
+    JLabel jLabel2 = new JLabel();
+    JPanel jPanel2 = new JPanel();
     /**
      *
      */
@@ -34,6 +38,26 @@ public class Window extends JLabel implements MouseListener  {
         frame.setIconImage(image.getImage());
         frame.getContentPane().setBackground(new Color(17, 59 ,8 ));
         myPanel = new MyPanel(game,this);
+
+        jLabel.setText(game.player1.name);
+        jLabel.setForeground(new Color(255,255,255));
+        jLabel.setFont (jLabel.getFont ().deriveFont (25.0f));
+        jPanel.setBounds(0,0,300,1000);
+        jPanel.setBackground(new Color(17, 59 ,8 ));
+        jPanel.setVisible(true);
+        jPanel.add(jLabel);
+
+
+        jLabel2.setText(game.player2.name);
+        jLabel2.setForeground(new Color(255,255,255));
+        jLabel2.setFont (jLabel.getFont ().deriveFont (25.0f));
+        jPanel2.setBounds(1300,0,300,1000);
+        jPanel2.setBackground(new Color(17, 59 ,8 ));
+        jPanel2.setVisible(true);
+        jPanel2.add(jLabel2);
+
+        frame.add(jPanel);
+        frame.add(jPanel2);
         frame.add(myPanel);
         makeBoard(game);
 
@@ -43,6 +67,9 @@ public class Window extends JLabel implements MouseListener  {
         frame.setVisible(true);
         repaint();
         ShowPathFlag = 1;
+
+
+
 
     }
     private void makeBoard(Game game){

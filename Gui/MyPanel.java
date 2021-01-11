@@ -30,6 +30,8 @@ public class MyPanel extends JLayeredPane {
     }
 
     public void paintComponent(Graphics g){
+
+
         Graphics2D graphics2D = (Graphics2D) g;
         if(ShowPathFlag == 2){
             graphics2D.setPaint(Color.BLUE);
@@ -152,6 +154,18 @@ public class MyPanel extends JLayeredPane {
             CurrentPiece = null;
             CheckerPieces = new CheckerPiece[4];
             this.remove = 0;
+
+            game.player1.CountScore();
+            game.player1.CountKings();
+
+            game.player1.ToString();
+
+            game.player2.CountScore();
+            game.player2.CountKings();
+
+            game.player2.ToString();
+
+
         }
             for (int i = 0; i < game.Black.length; i++) {
                 if(game.Black[i].x > -2){
@@ -181,5 +195,7 @@ public class MyPanel extends JLayeredPane {
                     graphics2D.fillOval(x + 3, y + 3, 54, 54);
                 }
             }
+
+
     }
 }
