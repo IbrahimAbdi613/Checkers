@@ -1,10 +1,11 @@
 package Checkers.Gui;
-import Checkers.Backend.Game;
 
+import Checkers.Backend.Game;
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
 import Checkers.Backend.CheckerPiece;
+
 public class MyPanel extends JLayeredPane {
 
     Game game;
@@ -30,8 +31,6 @@ public class MyPanel extends JLayeredPane {
     }
 
     public void paintComponent(Graphics g){
-
-
         Graphics2D graphics2D = (Graphics2D) g;
         if(ShowPathFlag == 2){
             graphics2D.setPaint(Color.BLUE);
@@ -157,14 +156,8 @@ public class MyPanel extends JLayeredPane {
 
             game.player1.CountScore();
             game.player1.CountKings();
-
-            game.player1.ToString();
-
             game.player2.CountScore();
             game.player2.CountKings();
-
-            game.player2.ToString();
-
 
         }
             for (int i = 0; i < game.Black.length; i++) {

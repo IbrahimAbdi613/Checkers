@@ -1,7 +1,6 @@
 package Checkers.Gui;
 
 import Checkers.Backend.Game;
-import Checkers.Backend.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,8 +20,12 @@ public class LaunchPage extends JFrame implements ActionListener {
     JPanel jPanel2  = new JPanel();
     JPanel jPanel3  = new JPanel();
     JPanel jPanel4  = new JPanel();
+    JPanel jPanel5  = new JPanel();
+
     JLabel jLabel = new JLabel();
     JLabel jLabel2 = new JLabel();
+    JLabel jLabel3 = new JLabel();
+
 
     public LaunchPage(){
         myButton.setBounds(200,450,200,40);
@@ -100,6 +103,17 @@ public class LaunchPage extends JFrame implements ActionListener {
             new Game(8,textField.getText(),textField2.getText());
             frame.dispose();
 
+        }
+        else{
+            jLabel3.setText("Please Enter your names in the boxes       ");
+            jLabel3.setForeground(new Color(255,255,255));
+            jLabel3.setFont (jLabel3.getFont ().deriveFont (20.0f));
+            jPanel5.setBounds(75,300,500,200);
+            jPanel5.setBackground(new Color(248, 13, 13));
+            jPanel5.add(jLabel3);
+            frame.add(jPanel5);
+            frame.pack();
+            frame.setVisible(true);
         }
 
     }

@@ -27,6 +27,7 @@ public class Player {
                 points ++;
         }
         this.Points = points;
+        game.window.updateScore();
     }
     public void CountKings(){
         int Kings = 0;
@@ -35,6 +36,7 @@ public class Player {
                 Kings ++;
         }
         this.Kings = Kings;
+        game.window.updateScore();
     }
 
     public void ToString(){
