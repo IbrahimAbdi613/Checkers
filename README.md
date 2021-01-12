@@ -4,7 +4,7 @@ This is a full functioning 2 player checkers game.
 
 In order to start enter your names in the text box and click done.
 
-![](Gui/ScreenShots/LaunchPage.png) 
+![](Gui/ScreenShots/launchpage.png) 
 
 When Starting the game you will be shown how to remove your opponents pieces by clicking 
 on the piece and then clicking the given path
